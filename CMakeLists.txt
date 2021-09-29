@@ -22,7 +22,7 @@ find_package(OpenGL REQUIRED)
 # ---- Declare library ----
 
 add_library(
-    glad_lib OBJECT
+    glad_lib STATIC
     source/glad/glad.c
 )
 
@@ -33,7 +33,7 @@ target_include_directories(
 )
 
 add_library(
-    learnopengl_lib OBJECT
+    learnopengl_lib STATIC
     source/opengl_sample/lib.cpp
 )
 
@@ -51,7 +51,7 @@ target_include_directories(
 
 target_compile_features(learnopengl_lib PUBLIC cxx_std_20)
 
-target_link_libraries(learnopengl_lib PRIVATE glad_lib glfw OpenGL::GL)
+target_link_libraries(learnopengl_lib PRIVATE glad_lib glfw OpenGL::GL ${CMAKE_DL_LIBS})
 
 # ---- Declare executable ----
 
